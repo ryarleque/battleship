@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
+import Modal from '@material-ui/core/Modal'; 
 
 export const DashboardContainerStyled = styled(Grid)`
   && {
@@ -59,5 +60,42 @@ export const DashboardStyled = styled(Grid)`
 export const GridContentStyled = styled.div`
   && {
     transform: scale(0.8);
+  }
+`;
+
+export const ModalContainerStyled = styled.div`
+  && {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24rem;
+    position: relative;
+    text-align: center;
+  }
+`;
+
+export const TryAgainButtonStyled = styled.div`
+  && {
+    background: #0C5063;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom:0.5rem;
+  }
+`;
+
+export const ExitButtonStyled = styled.div`
+  && {
+    background: #2691af;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
   }
 `;

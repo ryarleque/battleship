@@ -1,6 +1,8 @@
-import { createStore } from 'redux';
-import rootReducer from '../reducer/index';
+import { createStore, combineReducers } from 'redux';
+import battleshipReducer from '../reducer/index';
 
-const store = createStore(rootReducer);
+const store = createStore(combineReducers({
+    battleship: battleshipReducer
+}));
 
 export default store;

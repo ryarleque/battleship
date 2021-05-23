@@ -7,7 +7,7 @@ import HeaderComponent from './components/Header/Header';
 import DasboardComponent from './components/Dashboard/Dashboard';
 
 import { Provider } from 'react-redux'
-import store from './store'
+import store from './store/index';
 
 ReactDOM.render(
   <Provider store={store}>

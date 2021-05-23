@@ -1,7 +1,7 @@
 import { 
     GET_AVAILABLE_TURNS,
     GET_LEVEL,
-    UPDATED_LEVEL,
+    UPDATED_CONFIGURATION,
     DECREASE_AVAILABLE_TURNS
 } from '../constants/index';
 
@@ -10,9 +10,9 @@ export const getAvailableTurns = () => ({
     payload: {},
 });
 
-export const updatedLevel = (level: string, turns: number) => ({
-    type: UPDATED_LEVEL,
-    payload: { level, turns },
+export const updatedConfiguration = (level: string) => ({
+    type: UPDATED_CONFIGURATION,
+    payload: { level }
 });
 
 export const decreasedAvailableTurns = () => ({

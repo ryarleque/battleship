@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { 
-    DECREASE_AVAILABLE_TURNS
-} from '.././../constants/index';
-
+    decreasedAvailableTurns,
+    updatedConfiguration
+} from '../../actions/index';
 
 import {
     DashboardContainerStyled,
@@ -10,17 +10,33 @@ import {
     CardInfoStyled,
     DashboardStyled,
     GridContentStyled,
+    ModalContainerStyled,
+    TryAgainButtonStyled,
+    ExitButtonStyled
   } from './Dashboard.style';
 
+import Modal from '@material-ui/core/Modal'; 
 import NotesComponent from '../Notes/Notes';
 import { Grid } from '@material-ui/core';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 const DasboardComponent: React.FC<any> = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
-    const turns = 100;
+    const turns = useSelector((state: any) => state.battleship.availableTurns);
+    const level = useSelector((state: any) => state.battleship.level);
+    const [isMoodalopen, setModalMode] = React.useState(false);
+    const [isUserWin, setUserState] = useState(false);
+
+    const handleModalClose = () => {
+        setModalMode(false);
+        dispatch(updatedConfiguration(level));
+        setTable(createInitDashboard);
+        history.push("/");
+        
+      };
 
     const generatedDefaultArray = (length: number) => {
         let list: any[] = [];
@@ -48,6 +64,14 @@ const DasboardComponent: React.FC<any> = () => {
     React.useEffect(() => {
         handleDashboardSteps();
     }, []);
+
+
+    React.useEffect(() => {
+        if (turns === 0) {
+            setUserState(false);
+            setModalMode(true);
+        }
+    }, [turns]);
 
     const handleDashboardSteps = () => {
         handleShipsGeneration();
@@ -139,15 +163,30 @@ const DasboardComponent: React.FC<any> = () => {
             selectedSection,
             ...table.slice(latitude + 1)                 
         ]);
-        dispatch({ type: DECREASE_AVAILABLE_TURNS });
+        dispatch(decreasedAvailableTurns());
     };
+
+    const modalSuccessContent = (
+        <ModalContainerStyled>
+            <h2>YOU WIN!!!</h2>
+            <TryAgainButtonStyled onClick={handleModalClose}>Save</TryAgainButtonStyled>
+        </ModalContainerStyled>
+    );
+
+    const modalFailedContent = (
+        <ModalContainerStyled>
+            <h2>UPS.... YOU CAN DO BETTER!!!</h2>
+            <TryAgainButtonStyled onClick={handleModalClose}>Try Again</TryAgainButtonStyled>
+            <ExitButtonStyled onClick={handleModalClose}>Exit</ExitButtonStyled>
+        </ModalContainerStyled>
+    );
 
     return (
         <DashboardContainerStyled container>
             <GridContainerStyled item xs={12} sm={9}>
                 <CardInfoStyled>
                     <div>LEVEL</div>
-                    <div>Easy</div>
+                    <div>{level}</div>
                 </CardInfoStyled>
                 <CardInfoStyled>
                     <div>TURN</div>
@@ -174,7 +213,14 @@ const DasboardComponent: React.FC<any> = () => {
                     })}                    
                 </GridContentStyled>
             </Grid>
-            <NotesComponent/>    
+            <NotesComponent/>
+
+            <Modal
+                open={isMoodalopen}
+                onClose={handleModalClose}
+            >
+                { isUserWin ? modalSuccessContent : modalFailedContent }
+            </Modal>
         </DashboardContainerStyled>
     );
 }

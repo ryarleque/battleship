@@ -1,29 +1,16 @@
-import { Grid } from '@material-ui/core';
-
 import styled from 'styled-components';
 
-export const PlaceholderStyled = styled.div`
+export const ConfigurationContainerStyled = styled.div`
   && {
-    height: 100vh;
+    padding: 2rem;
   }
 `;
 
-export const DetailsGridStyled = styled(Grid)`
+export const TitleConfigurationStyled = styled.div`
   && {
-    position: relative;
-    overflow: hidden;
-    ${p => p.theme.breakpoints.down('xs')} {
-      text-align: center;
-
-      div[class*='MediaViewerViewContainer'] {
-        width: calc(100% + 32px);
-        margin-left: -${p => p.theme.spacing(2)}px;
-      }
-    }
-    ${p => p.theme.breakpoints.down('md')} {
-      .buttons-wrapper {
-        text-align: center;
-      }
-    }
+    color: #B06A27;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
   }
 `;
