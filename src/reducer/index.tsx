@@ -2,16 +2,25 @@ import {
     GET_AVAILABLE_TURNS,
     GET_LEVEL,
     DECREASE_AVAILABLE_TURNS,
-    UPDATED_CONFIGURATION
+    UPDATED_CONFIGURATION,
+    SAVE_GAME
 } from '../constants/index';
 
 const initialStates = {
-    availableTurns: 100,
-    level: 'Easy'
+    availableTurns: 999,
+    level: 'Easy',
+    savedGames: []
 };
 
 function battleshipReducer(state = initialStates, action: any) {
-    debugger;
+    const getTurns = (level: string) => {
+        switch(level){
+            case 'Easy': return 999;
+            case 'Medium': return 100; 
+            default: return 50;
+        }
+    }
+
     switch(action.type) {
         case GET_AVAILABLE_TURNS:
             return {...state};
@@ -20,13 +29,16 @@ function battleshipReducer(state = initialStates, action: any) {
         case DECREASE_AVAILABLE_TURNS:
             return {...state, availableTurns: state.availableTurns - 1};
         case UPDATED_CONFIGURATION:
-            let defaultturns: number;
-            switch(action.payload.level){
-                case 'Easy': defaultturns = 999; break
-                case 'Medium': defaultturns =100; break
-                default: defaultturns =50; break 
+            let defaultTurns: number = getTurns(action.payload.level);
+            return {...state, availableTurns: defaultTurns, level: action.payload.level}
+        case SAVE_GAME:
+            let standardTurns: number = getTurns(state.level);
+            let newSavedGame : any = {
+                level: state.level, 
+                isUserWon: action.payload.isUserWon,
+                turns: action.payload.isUserWon ? standardTurns - state.availableTurns : 0
             }
-            return {...state, availableTurns: defaultturns, level: action.payload.level}
+            return {...state, savedGames : [...state.savedGames, newSavedGame]};
         default:
             return state;
     }

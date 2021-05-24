@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
-import Modal from '@material-ui/core/Modal'; 
 
 export const DashboardContainerStyled = styled(Grid)`
   && {

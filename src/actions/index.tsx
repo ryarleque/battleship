@@ -2,7 +2,8 @@ import {
     GET_AVAILABLE_TURNS,
     GET_LEVEL,
     UPDATED_CONFIGURATION,
-    DECREASE_AVAILABLE_TURNS
+    DECREASE_AVAILABLE_TURNS,
+    SAVE_GAME
 } from '../constants/index';
 
 export const getAvailableTurns = () => ({
@@ -23,4 +24,9 @@ export const decreasedAvailableTurns = () => ({
 export const getLevel = () => ({
     type: GET_LEVEL,
     payload: {},
+});
+
+export const saveGame = (isUserWon: boolean) => ({
+    type: SAVE_GAME,
+    payload: {isUserWon},
 });

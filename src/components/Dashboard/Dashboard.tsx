@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { 
     decreasedAvailableTurns,
-    updatedConfiguration
+    updatedConfiguration,
+    saveGame
 } from '../../actions/index';
 
 import {
@@ -30,12 +31,12 @@ const DasboardComponent: React.FC<any> = () => {
     const [isMoodalopen, setModalMode] = React.useState(false);
     const [isUserWin, setUserState] = useState(false);
 
-    const handleModalClose = () => {
-        setModalMode(false);
+    const handleModalClose = () => {        
         dispatch(updatedConfiguration(level));
-        setTable(createInitDashboard);
-        history.push("/");
-        
+        dispatch(saveGame(isUserWin));        
+        setModalMode(false);
+        setTable(createInitDashboard);        
+        history.push("/");      
       };
 
     const generatedDefaultArray = (length: number) => {
@@ -100,7 +101,6 @@ const DasboardComponent: React.FC<any> = () => {
             var longitude = getRandomPosition(0, 10);
             var orientation = getRandomPosition(0, 1) === 0 ? 'H' : 'V' ;
             var validationResult = validateGeneratedValues(latitude, longitude, orientation, shipType);
-
             validationResult.isValid ?
             validationResult.result.forEach(item => updatedPositions(item, shipType, validationResult.result))
            : retryGenerateShipType(shipType, shipNumber);        
@@ -112,13 +112,11 @@ const DasboardComponent: React.FC<any> = () => {
              var longitude = getRandomPosition(0, 10);
              var orientation = getRandomPosition(0, 1) === 0 ? 'H' : 'V' ;
              var validationResult = validateGeneratedValues(latitude, longitude, orientation, shipType);
- 
              validationResult.isValid ?
              validationResult.result.forEach(item => updatedPositions(item, shipType, validationResult.result))
             : retryGenerateShipType(shipType, shipNumber);
     };
     
-
     const validateGeneratedValues = (latitude: number, longitude: number, orientation: string, shipType: number) => {
         let tmpList = {
             isValid: true,

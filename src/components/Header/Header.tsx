@@ -9,9 +9,9 @@ const HeaderComponent: React.FC<any> = () => {
 
     return (
         <HeaderContainerStyled>
-            <Link to="/">Dashboard</Link>            
+            <Link to="/dashboard">Dashboard</Link>            
             <Link to="/configuration">Configuration</Link>
-            <Link to="/">History</Link>
+            <Link to="/history">History</Link>
         </HeaderContainerStyled>
     );
 }

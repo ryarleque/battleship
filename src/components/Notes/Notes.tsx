@@ -25,10 +25,6 @@ const NotesComponent: React.FC<any> = () => {
             <div className="goodShoot"></div>
             <div className="noteDescription">GREAT SHOOT</div>                    
         </NoteItemListStyled>
-        <NoteItemListStyled>
-            <div className="downShip"></div>
-            <div className="noteDescription">SUNKEN SHIP</div>                    
-        </NoteItemListStyled>
     </NotesContentStyled>
     );
 }

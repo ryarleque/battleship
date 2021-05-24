@@ -29,11 +29,6 @@ export const NoteItemListStyled = styled.div`
         height: 2rem;
         background: #2691af;
     }
-    .downShip {
-        width: 3rem;
-        height: 2rem;
-        background: black;
-    }
     .noteDescription {
         width: 7rem;
         font-size: 1rem;
