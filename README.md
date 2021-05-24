@@ -1,3 +1,15 @@
+# The Battleship Challenge
+
+The porpuse of this challenge is to apply react principles to resole the batteship game.
+
+Staff applied:
+- React (Functional components)
+- React Hooks (useState, useSelector, useDispatch)
+- Redux (actions - reducer - store)
+- Material UI
+- Styled Components
+- Linting
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
