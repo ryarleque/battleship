@@ -1,6 +1,11 @@
 # The Battleship Challenge
 
-The porpuse of this challenge is to apply react principles to resole the batteship game.
+User is able to setting up the level, and based on it the available turns are going to be updated on the configuration page.
+The User is redirected to the dashboard page, inside here, the app displays the level and available turns, also the table game view and a notes section.
+When users clicks on a grid not previous selected, the avaible counting reduces in one and the table game updated.
+If the counter gets zero, an error modal is displayed, after that the game is saved and user could check it on history view.
+
+The porpuse of this challenge is to apply the react principles to solve the batteship game.
 
 Staff applied:
 - React (Functional components)
